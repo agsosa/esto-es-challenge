@@ -1,3 +1,3 @@
-import tw from 'twin.macro';
+import tw, { styled} from 'twin.macro';
 
-export default tw.td`flex flex-col`; // Vertical (flex col)
+export default styled.td(({ centered }) => [tw`flex flex-col`, centered && tw`justify-center items-center`]); // Horizontal (flex row)

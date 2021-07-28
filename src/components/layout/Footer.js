@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import tw from 'twin.macro';
 import Image from 'next/image';
 import { Tooltip } from '@chakra-ui/react';
@@ -21,7 +22,7 @@ const techs = [
   { name: 'TailwindCSS', url: 'https://tailwindcss.com/', image: '/tailwind.webp' },
 ];
 
-export default function FooterComponent() {
+const FooterComponent = memo(() => {
   return (
     <Footer>
       <Left>
@@ -42,4 +43,6 @@ export default function FooterComponent() {
       </Right>
     </Footer>
   );
-}
+});
+
+export default FooterComponent;
