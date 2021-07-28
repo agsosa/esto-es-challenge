@@ -1,53 +1,44 @@
 import tw from 'twin.macro';
 import Box from '@components/common/Box';
-import { Input } from '@chakra-ui/react';
 import Button from '@components/common/Button';
-import { Select } from "@chakra-ui/react"
+import { useFormik } from 'formik';
+import validationSchema from './validationSchema';
+import Input from './Input';
+import Select from './Select';
 
-const FormContainer = tw.div`flex flex-col space-y-5 justify-start items-start`;
-const InputContainer = tw.div`flex flex-col w-full`;
+const FormContainer = tw.form`flex flex-col space-y-5 justify-start items-start`;
 
 export default function Form() {
+  const formik = useFormik({
+    initialValues: {
+      projectName: '',
+      description: '',
+      projectManager: null,
+      assignee: null,
+      status: true,
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
+  const statusOptions = [
+    { value: true, label: 'Enabled' },
+    { value: false, label: 'Disabled' },
+  ];
+
   return (
     <Box>
-      <FormContainer>
-        <InputContainer>
-          <span>Project name</span>
-          <Input placeholder='' />
-        </InputContainer>
-        
-        <InputContainer>
-          <span>Description</span>
-          <Input placeholder='' />
-        </InputContainer>
+      <FormContainer onSubmit={formik.handleSubmit}>
+        <Input name='projectName' label='Project name' formik={formik} />
+        <Input name='description' label='Description' formik={formik} />
 
-        <InputContainer>
-          <span>Project manager</span>
-          <Select placeholder='Select a person'>
-            <option value='option1'>Option 1</option>
-            <option value='option2'>Option 2</option>
-            <option value='option3'>Option 3</option>
-          </Select>
-        </InputContainer>
+        <Select name='projectManager' label='Project manager' placeholder='Select a person' formik={formik} />
+        <Select name='assignee' label='Assigned to' placeholder='Select a person' formik={formik} />
+        <Select name='status' label='Status' placeholder='Select a status' formik={formik} options={statusOptions} />
 
-        <InputContainer>
-          <span>Assigned to</span>
-          <Select placeholder='Select a person'>
-            <option value='option1'>Option 1</option>
-            <option value='option2'>Option 2</option>
-            <option value='option3'>Option 3</option>
-          </Select>
-        </InputContainer>
-
-        <InputContainer>
-          <span>Status</span>
-          <Select placeholder='Select status'>
-            <option value='option1'>Enabled</option>
-            <option value='option2'>Disabled</option>
-          </Select>
-        </InputContainer>
-
-        <Button label='Create project' />
+        <Button isLoading={formik.isSubmitting} type='submit' label='Create project' />
       </FormContainer>
     </Box>
   );
