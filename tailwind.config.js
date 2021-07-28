@@ -2,10 +2,61 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          50: '#fff4f5',
+          100: '#fee9ea',
+          200: '#fdc8cb',
+          300: '#fba7ab',
+          400: '#f8646c',
+          500: '#f5222d',
+          600: '#dd1f29',
+          700: '#b81a22',
+          800: '#93141b',
+          900: '#781116',
+        },
+        caramel: {
+          50: '#fffdfb',
+          100: '#fffcf7',
+          200: '#fff7ec',
+          300: '#fff3e0',
+          400: '#ffe9c9',
+          500: '#ffe0b2',
+          600: '#e6caa0',
+          700: '#bfa886',
+          800: '#99866b',
+          900: '#7d6e57',
+        },
+        silver: {
+          50: '#fefeff',
+          100: '#fefefe',
+          200: '#fbfcfd',
+          300: '#f9fafb',
+          400: '#f5f6f8',
+          500: '#f0f2f5',
+          600: '#d8dadd',
+          700: '#b4b6b8',
+          800: '#909193',
+          900: '#767778',
+        },
+        alabaster: {
+          50: '#ffffff',
+          100: '#ffffff',
+          200: '#fefefe',
+          300: '#fdfdfd',
+          400: '#fcfcfc',
+          500: '#fafafa',
+          600: '#e1e1e1',
+          700: '#bcbcbc',
+          800: '#969696',
+          900: '#7b7b7b',
+        },
+      },
+    },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-}
+};
