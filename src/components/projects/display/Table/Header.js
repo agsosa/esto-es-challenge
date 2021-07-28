@@ -14,7 +14,7 @@ export default function Row() {
       <Header>Project Manager</Header>
       <Header>Assigned to</Header>
       <Header>Status</Header>
-      <Header roundedRight>Action</Header>
+      <Header roundedRight>Actions</Header>
     </TableRow>
   );
 }

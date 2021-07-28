@@ -30,8 +30,9 @@ export default function FooterComponent() {
       <Right>
         <span>Created with</span>
         <TechContainer>
+          {/* Map the techs array to images */}
           {techs.map((t) => (
-            <Tooltip key={t.name} label={t.name} aria-label={t.name} placement='top'>
+            <Tooltip key={t.name} label={t.name} placement='top'>
               <a href={t.url} target='_blank' rel="noreferrer">
                 <Img src={t.image} {...techIconSize} />
               </a>
