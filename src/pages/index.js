@@ -3,9 +3,10 @@ import tw from 'twin.macro';
 import Footer from '@components/layout/Footer';
 import Header from '@components/layout/Header';
 import Nav from '@components/layout/Nav';
+import ProjectsTable from '@components/projects/Table';
 
 const Container = tw.div`flex flex-col h-screen`;
-const Main = tw.main`bg-silver-500 w-full h-full`;
+const Main = tw.main`bg-silver-500 w-full h-full py-8 px-12`;
 
 export default function Home() {
   return (
@@ -19,7 +20,9 @@ export default function Home() {
       <Header />
       <Nav />
 
-      <Main>Prueba</Main>
+      <Main>
+        <ProjectsTable />
+      </Main>
 
       <Footer />
     </Container>

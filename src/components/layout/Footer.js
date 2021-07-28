@@ -2,7 +2,7 @@ import tw from 'twin.macro';
 import Image from 'next/image';
 import { Tooltip } from '@chakra-ui/react';
 
-const Footer = tw.footer`bg-gray-200 border-t w-full p-10 flex items-center justify-between`;
+const Footer = tw.footer`bg-silver-500 border-t border-black border-opacity-10 w-full py-10 px-12 flex items-center justify-between`;
 
 const Left = tw.span`text-lg font-semibold flex justify-center items-center space-x-4`;
 const YearText = tw.span`ml-1 text-gray-400 text-base font-normal`;
