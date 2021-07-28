@@ -32,7 +32,7 @@ export default function FooterComponent() {
         <TechContainer>
           {techs.map((t) => (
             <Tooltip key={t.name} label={t.name} aria-label={t.name} placement='top'>
-              <a href={t.url} target='_blank'>
+              <a href={t.url} target='_blank' rel="noreferrer">
                 <Img src={t.image} {...techIconSize} />
               </a>
             </Tooltip>
