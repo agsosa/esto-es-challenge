@@ -1,6 +1,11 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import tw from 'twin.macro';
+
+const Container = tw.div`flex flex-col p-5 bg-gray-100`;
+const Text = tw.span`text-lg`;
+const Box = tw.div`bg-black p-5`;
 
 export default function Home() {
   return (
@@ -51,6 +56,8 @@ export default function Home() {
           </a>
         </div>
       </main>
+
+      <Container><Text>XDDD</Text><Box /></Container>
 
       <footer className={styles.footer}>
         <a
