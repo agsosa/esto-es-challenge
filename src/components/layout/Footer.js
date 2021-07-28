@@ -25,7 +25,7 @@ export default function FooterComponent() {
   return (
     <Footer>
       <Left>
-        Alejandro Sosa <YearText>© 2021</YearText>
+        Alejandro Sosa <YearText>© {new Date().getFullYear()}</YearText>
       </Left>
       <Right>
         <span>Created with</span>
