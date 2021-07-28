@@ -1,9 +1,9 @@
-import tw from 'twin.macro';
+import { memo } from 'react';
 import { Select } from '@chakra-ui/react';
 import InputContainer from './shared/InputContainer';
 import ErrorText from './shared/ErrorText';
 
-export default function Form({ name, label, formik, options, ...props }) {
+const SelectComponent = memo(({ name, label, formik, options, ...props }) => {
   return (
     <InputContainer>
       <label htmlFor={name}>{label}</label>
@@ -16,7 +16,9 @@ export default function Form({ name, label, formik, options, ...props }) {
         {...props}>
         {Array.isArray(options) && options.map((op) => <option value={op.value} label={op.label || op.value} />)}
       </Select>
-      <ErrorText>{formik.errors[name]}</ErrorText>
+      <ErrorText>{formik.touched[name] && formik.errors[name]}</ErrorText>
     </InputContainer>
   );
-}
+});
+
+export default SelectComponent;

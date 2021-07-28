@@ -1,9 +1,9 @@
-import tw from 'twin.macro';
+import { memo } from 'react';
 import { Input } from '@chakra-ui/react';
 import InputContainer from './shared/InputContainer';
 import ErrorText from './shared/ErrorText';
 
-export default function Form({ label, type = "text", placeholder = "", name, formik, ...props }) {
+const InputComponent = memo(({ label, type = "text", placeholder = "", name, formik, ...props }) => {
   if (!formik) return null;
 
   return (
@@ -19,7 +19,9 @@ export default function Form({ label, type = "text", placeholder = "", name, for
         value={formik.values[name]}
         {...props}
       />
-      <ErrorText>{formik.errors[name]}</ErrorText>
+      <ErrorText>{formik.touched[name] && formik.errors[name]}</ErrorText>
     </InputContainer>
   );
-}
+});
+
+export default InputComponent;

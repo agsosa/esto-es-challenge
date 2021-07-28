@@ -23,6 +23,7 @@ export const showConfirmation = ({ title, description, confirmText, cancelText }
     const result = await Swal.fire({
       title: title || 'Confirmation required',
       showCancelButton: true,
+      reverseButtons: true,
       text: description || 'Please confirm to continue',
       icon: 'warning',
       confirmButtonText: confirmText || 'Accept',
