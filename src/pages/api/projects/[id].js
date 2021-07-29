@@ -9,7 +9,7 @@ const getProjectById = (id) => {
   return DB.projects[id];
 };
 
-// GET /project/:id
+// GET /projects/:id
 const handleGetRequest = (req, res) => {
   const found = getProjectById(req.query.id);
   if (!found || found.deletedAt) return res.status(400).json({ error: true, message: 'Invalid project ID' });
@@ -17,7 +17,7 @@ const handleGetRequest = (req, res) => {
   res.status(200).json({ error: false, result: found });
 };
 
-// DELETE /project/:id
+// DELETE /projects/:id
 const handleDeleteRequest = (req, res) => {
   const found = getProjectById(req.query.id);
   if (!found) return res.status(400).json({ error: true, message: 'Invalid project ID' });

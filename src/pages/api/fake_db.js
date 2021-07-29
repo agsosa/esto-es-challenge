@@ -28,7 +28,7 @@ const seed = () => {
   if (DB.projects.length > 0) return;
   
   // Create fake persons
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 20; i++) {
     DB.persons.push({
       id: i,
       firstName: faker.name.firstName(),

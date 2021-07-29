@@ -2,8 +2,9 @@ import useSWR, { mutate } from 'swr';
 import axios from 'axios';
 
 export default {
-  getProjectById: (id) => useSWR(`/api/projects/${id}`),
+  getProjectById: (id) => useSWR(() => id != null ? `/api/projects/${id}` : null),
   getProjects: () => useSWR(`/api/projects`),
+  getPersons: () => useSWR(`/api/persons`),
   deleteProject: (id) =>
     new Promise((resolve) => {
       axios

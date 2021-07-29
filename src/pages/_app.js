@@ -3,9 +3,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import Head from 'next/head';
 import Footer from '@components/layout/Footer';
 import Header from '@components/layout/Header';
-import tw from 'twin.macro';
-
-const Container = tw.div`flex flex-col h-full justify-center items-center min-h-screen w-full bg-silver-500`;
+import PageContainer from '@components/layout/PageContainer';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -16,13 +14,13 @@ function MyApp({ Component, pageProps }) {
         <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Container>
+      <PageContainer>
         <Header />
 
         <Component {...pageProps} />
 
         <Footer />
-      </Container>
+      </PageContainer>
     </ChakraProvider>
   );
 }

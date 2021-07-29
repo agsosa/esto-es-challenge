@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import API from '@lib/API';
 import { useMediaQuery } from '@chakra-ui/react';
 import { Spinner } from '@chakra-ui/react';
-import VStack from '@components/common/VStack';
 
 export default function Home() {
   const router = useRouter();

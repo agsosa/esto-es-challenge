@@ -5,6 +5,7 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { Popover, PopoverTrigger, PopoverContent, PopoverArrow } from '@chakra-ui/react';
 import { showConfirmation, showSuccess, showError } from '@lib/Alerts';
 import API from '@lib/API';
+import { useRouter } from 'next/router'
 
 const MenuBtn = tw.button`text-2xl`;
 
@@ -13,11 +14,14 @@ const Item = tw.li`flex space-x-2 items-center border-b p-3 w-full cursor-pointe
 
 export default function Actions({ project }) {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter()
 
   const open = () => setIsOpen(!isOpen);
   const close = () => setIsOpen(false);
 
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    router.push(`/projects/update/${project.id}`);
+  };
 
   const handleDelete = async () => {
     const isConfirmed = await showConfirmation({
