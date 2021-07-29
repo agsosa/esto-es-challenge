@@ -40,7 +40,7 @@ const handlePostRequest = (req, res) => {
 const handleGetRequest = (req, res) => {
   const page = Number.parseInt(req.query.page) || 1;
 
-  const filtered = DB.projects.filter((q) => !q.deletedAt);
+  const filtered = DB.projects.filter((q) => !q.deletedAt).sort((a, b) => b.createdAt - a.createdAt);
   const totalPages = Math.max(Math.floor(filtered.length / LIMIT_PER_PAGE), 1);
   
   if (page <= 0 || page > totalPages) return res.status(403).json({error: true, message: `Page must be between 1 and ${totalPages}`})

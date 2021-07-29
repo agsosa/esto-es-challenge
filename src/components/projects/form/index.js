@@ -21,19 +21,24 @@ export default function Form({ project }) {
     initialValues: {
       projectName: isEditMode ? project.projectName : '',
       description: isEditMode ? project.description : '',
-      managerId: isEditMode ? project.manager.id : "",
-      assigneeId: isEditMode ? project.assignee.id : "",
+      managerId: isEditMode ? project.manager.id : '',
+      assigneeId: isEditMode ? project.assignee.id : '',
       status: isEditMode ? project.status : true,
     },
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
-        const created = await API.createProject(values);
-        if (created) {
-          showSuccess({ title: 'Project created', description: 'The project has been created successfully' });
-          resetForm();
-        } else {
-          showError({ title: 'Error', description: "The project couldn't be created, please try again" });
-        }
+      const func = isEditMode ? API.updateProject : API.createProject;
+      const result = await func({ ...values, id: project.id });
+
+      if (result) {
+        showSuccess({
+          title: isEditMode ? 'Project updated ' : 'Project created',
+          description: `The project has been ${isEditMode ? 'updated' : 'created'} successfully`,
+        });
+        if (!isEditMode) resetForm();
+      } else {
+        showError({ title: 'Error', description: 'An error has occurred, please try again' });
+      }
     },
   });
 

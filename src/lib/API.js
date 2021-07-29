@@ -29,4 +29,16 @@ export default {
         })
         .catch((err) => resolve(false));
     }),
+  updateProject: (data) =>
+    new Promise((resolve) => {
+      axios
+        .patch(`/api/projects/${data.id}`, data)
+        .then((result) => {
+          if (!result.error) {
+            mutate(`/api/projects/${data.id}`);
+            resolve(true);
+          } else resolve(false);
+        })
+        .catch((err) => { console.log(err); resolve(false)});
+    }),
 };
