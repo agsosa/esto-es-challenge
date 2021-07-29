@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default {
   getProjectById: (id) => useSWR(() => (id != null ? `/api/projects/${id}` : null)),
-  getProjects: (page = 1) => useSWR(`/api/projects?page=${page}`),
+  getProjects: (page = 1, search = "") => useSWR(`/api/projects?page=${page}&&search=${search}`),
   getPersons: () => useSWR(`/api/persons`),
   deleteProject: (id) =>
     new Promise((resolve) => {
