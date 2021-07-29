@@ -1,17 +1,31 @@
 import tw from 'twin.macro';
-import Button from '@components/common/Button';
+import HStack from '@components/common/HStack';
+import {  AiOutlineArrowLeft } from 'react-icons/ai';
+import useHistory from '@lib/useHistory';
+import { useRouter } from 'next/router';
 
-import { AiOutlinePlus } from 'react-icons/ai';
+const Nav = tw.nav`bg-white px-4 sm:px-6 md:px-14 py-4 w-full shadow-lg border-b flex flex-col space-y-3 md:space-y-0 md:flex-row md:h-20 justify-between items-center`;
+const NavTitle = tw.h1`font-bold text-2xl`;
 
-const Nav = tw.nav`bg-white p-4 h-20 shadow-xl border-b flex justify-between items-center`;
+const BackBtn = tw.button`flex justify-center items-center space-x-2 cursor-pointer mr-3 text-xl`;
 
-const NavTitle = tw.h1`font-bold text-xl`;
+export default function NavComponent({ useBack, title, rightComponent }) {
+  const { previous } = useHistory();
+  const router = useRouter();
 
-export default function NavComponent() {
+  const handleBack = () => router.back();
+
   return (
     <Nav>
-      <NavTitle>My projects</NavTitle>
-      <Button icon={<AiOutlinePlus size='20px' />} label='Add project' />
+      <HStack centered>
+        {previous != null && useBack && (
+          <BackBtn onClick={handleBack}>
+            <AiOutlineArrowLeft /> <span>Back</span>
+          </BackBtn>
+        )}
+        <NavTitle>{title}</NavTitle>
+      </HStack>
+      {rightComponent}
     </Nav>
   );
 }
