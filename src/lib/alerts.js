@@ -1,4 +1,5 @@
 // Simple alerts/notifications/popups service
+// Every function here can be awaited (async) to wait for the confirmation button
 
 import Swal from 'sweetalert2';
 

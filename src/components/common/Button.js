@@ -1,5 +1,8 @@
+// Custom button component
+
 import tw from 'twin.macro';
 import { Spinner } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 
 const Btn = tw.button`
 flex justify-around items-center space-x-2 
@@ -17,4 +20,16 @@ export default function Button({ icon, label, isLoading, ...props }) {
       <span>{isLoading ? "Please wait..." : label}</span>
     </Btn>
   );
+}
+
+Button.defaultProps = {
+  isLoading: false,
+  label: "",
+  icon: null,
+}
+
+Button.propTypes = {
+  icon: PropTypes.node,
+  label: PropTypes.string,
+  isLoading: PropTypes.bool
 }

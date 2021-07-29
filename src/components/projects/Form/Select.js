@@ -1,7 +1,10 @@
+// Select component compatible with formik
+
 import { memo } from 'react';
 import { Select } from '@chakra-ui/react';
 import InputContainer from './shared/InputContainer';
 import ErrorText from './shared/ErrorText';
+import PropTypes from 'prop-types';
 
 const SelectComponent = memo(({ name, label, formik, options, ...props }) => {
   return (
@@ -23,3 +26,15 @@ const SelectComponent = memo(({ name, label, formik, options, ...props }) => {
 });
 
 export default SelectComponent;
+
+SelectComponent.defaultProps = {
+  label: "",
+  options: [],
+}
+
+SelectComponent.propTypes = {
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
+  name: PropTypes.string.isRequired,
+  formik: PropTypes.object.isRequired
+}

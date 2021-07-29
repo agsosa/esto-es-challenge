@@ -1,3 +1,7 @@
+/* 
+  EDIT PROJECT PAGE (form)
+*/
+
 import Main from '@components/layout/Main';
 import Nav from '@components/layout/Nav';
 import { useRouter } from 'next/router';
@@ -15,9 +19,9 @@ export default function ProjectForm() {
       <Nav useBack title='Edit project' />
 
       <Main>
-        {isValidating && <Spinner size='big' />}
-        {data && !data.error && <Form project={data.result} />}
-        {data && data.error && <span>Project #{id} couldn't be loaded</span>}
+        {/* Loading */ isValidating && <Spinner size='big' />}
+        {/* Project loaded */ data && !data.error && <Form project={data.result} />}
+        {/* Error, project not loaded */ data && data.error && <span>Project #{id} couldn't be loaded</span>}
       </Main>
     </>
   );

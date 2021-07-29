@@ -1,9 +1,16 @@
+/*
+  Table component to display projects
+
+  To use simple pass an array of project objects as props
+*/
+
 import tw, { styled } from 'twin.macro';
 import ProjectInfo from './shared/ProjectInfo';
 import AssignedTo from './shared/AssignedTo';
 import Actions from './shared/Actions';
 import ProjectManager from './shared/ProjectManager';
 import Status from './shared/Status';
+import PropTypes from 'prop-types';
 
 const Table = tw.table`w-full shadow-md bg-white`;
 
@@ -58,4 +65,8 @@ export default function TableComponent({ projects }) {
       </tbody>
     </Table>
   );
+}
+
+TableComponent.propTypes = {
+  projects: PropTypes.arrayOf(PropTypes.object).isRequired
 }

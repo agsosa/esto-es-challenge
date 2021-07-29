@@ -1,3 +1,5 @@
+// Footer component with tech stack icons
+
 import { memo } from 'react';
 import tw from 'twin.macro';
 import Image from 'next/image';

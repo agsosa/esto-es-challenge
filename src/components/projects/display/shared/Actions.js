@@ -1,3 +1,9 @@
+/*
+  Popover to display and trigger actions for a specific project (edit, delete)
+
+  To use simply pass a project object through props
+*/
+
 import { useState } from 'react';
 import tw from 'twin.macro';
 import { HiDotsVertical, HiOutlinePencilAlt } from 'react-icons/hi';
@@ -6,6 +12,7 @@ import { Popover, PopoverTrigger, PopoverContent, PopoverArrow } from '@chakra-u
 import { showConfirmation, showSuccess, showError } from '@lib/Alerts';
 import API from '@lib/API';
 import { useRouter } from 'next/router'
+import PropTypes from 'prop-types';
 
 const MenuBtn = tw.button`text-2xl`;
 
@@ -19,15 +26,18 @@ export default function Actions({ project }) {
   const open = () => setIsOpen(!isOpen);
   const close = () => setIsOpen(false);
 
+  // On edit click
   const handleEdit = () => {
     router.push(`/projects/update/${project.id}`);
   };
 
+  // On delete click
   const handleDelete = async () => {
     const isConfirmed = await showConfirmation({
       title: 'Delete project',
       description: `Do you want to delete the project "${project.projectName}"?`,
     });
+
     if (isConfirmed) {
       const deleted = await API.deleteProject(project.id);
       if (deleted) showSuccess(); else showError();
@@ -58,4 +68,8 @@ export default function Actions({ project }) {
       </Popover>
     </>
   );
+}
+
+Actions.propTypes = {
+  project: PropTypes.shape({ id: PropTypes.number.isRequired, projectName: PropTypes.string.isRequired }).isRequired
 }

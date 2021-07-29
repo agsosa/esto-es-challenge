@@ -1,3 +1,7 @@
+/*
+  CREATE PROJECT PAGE (form)
+*/
+
 import Main from '@components/layout/Main';
 import Nav from '@components/layout/Nav';
 import Form from '@components/projects/Form';

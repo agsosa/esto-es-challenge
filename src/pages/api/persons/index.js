@@ -8,12 +8,15 @@ const LIMIT_PER_PAGE = 30;
 const handleGetRequest = (req, res) => {
   const page = Number.parseInt(req.query.page) || 1;
 
+  // Filter persons by deletedAt
   const filtered = DB.persons.filter((q) => !q.deletedAt);
+
   const totalPages = Math.max(Math.floor(filtered.length / LIMIT_PER_PAGE), 1);
 
   if (page <= 0 || page > totalPages)
     return res.status(403).json({ error: true, message: `Page must be between 1 and ${totalPages}` });
 
+  // Limit persons by page
   const paginated = filtered.slice((page - 1) * LIMIT_PER_PAGE, page * LIMIT_PER_PAGE);
 
   res.status(200).json({

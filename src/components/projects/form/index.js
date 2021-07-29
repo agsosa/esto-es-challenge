@@ -1,3 +1,9 @@
+/* 
+  Form to create or edit a project
+
+  To edit a project simply pass a project object through props
+*/
+
 import tw from 'twin.macro';
 import Box from '@components/common/Box';
 import Button from '@components/common/Button';
@@ -5,9 +11,9 @@ import { useFormik } from 'formik';
 import validationSchema from './validationSchema';
 import Input from './Input';
 import Select from './Select';
-import { showError, showSuccess, showConfirmation } from '@lib/Alerts';
+import { showError, showSuccess } from '@lib/Alerts';
 import API from '@lib/API';
-import { Spinner } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 
 const FormContainer = tw.form`flex flex-col space-y-5 justify-start items-start`;
 
@@ -81,4 +87,12 @@ export default function Form({ project }) {
       </FormContainer>
     </Box>
   );
+}
+
+Form.defaultProps = {
+  project: null,
+}
+
+Form.propTypes = {
+  project: PropTypes.object
 }

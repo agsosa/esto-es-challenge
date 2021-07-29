@@ -35,6 +35,7 @@ const handleUpdateRequest = (req, res) => {
 
   delete req.body.id;
 
+  // Update project properties with the input
   Object.entries(req.body).forEach(([k,v]) => {
     if (found[k]) found[k] = v;
   }) 
@@ -43,7 +44,6 @@ const handleUpdateRequest = (req, res) => {
 };
 
 export default function handler(req, res) {
-  console.log(req.method)
   if (req.method === 'GET') {
     handleGetRequest(req, res);
   } else if (req.method === 'DELETE') {

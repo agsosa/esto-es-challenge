@@ -1,3 +1,5 @@
+// Header with a logo placeholder
+
 import tw from 'twin.macro';
 import Link from 'next/link';
 

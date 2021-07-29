@@ -1,3 +1,5 @@
+/* Custom next.js 404 page */
+
 import  tw from 'twin.macro';
 
 const Container = tw.div`h-full w-full flex justify-center items-center p-12 lg:p-24`;
