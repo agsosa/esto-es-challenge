@@ -11,7 +11,7 @@ disabled:opacity-50 disabled:cursor-not-allowed`;
 
 export default function Button({ icon, label, isLoading, ...props }) {
   return (
-    <Btn {...props} disabled={isLoading}>
+    <Btn {...props}>
       {isLoading && <Spinner />}
       {icon}
       <span>{isLoading ? "Please wait..." : label}</span>

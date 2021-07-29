@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import validationSchema from './validationSchema';
 import Input from './Input';
 import Select from './Select';
-import { showError, showConfirmation } from '@lib/Alerts';
+import { showError, showSuccess, showConfirmation } from '@lib/Alerts';
 import API from '@lib/API';
 import { Spinner } from '@chakra-ui/react';
 
@@ -15,20 +15,25 @@ export default function Form({ project }) {
   const { data: personsData, error, isValidating } = API.getPersons();
   const persons = personsData?.result?.list;
 
-  const isEditMode = project != null && typeof project === "object";
-  
+  const isEditMode = project != null && typeof project === 'object';
+
   const formik = useFormik({
     initialValues: {
       projectName: isEditMode ? project.projectName : '',
       description: isEditMode ? project.description : '',
-      projectManager: isEditMode ? project.manager.id : null,
-      assignee: isEditMode ? project.assignee.id : null,
+      managerId: isEditMode ? project.manager.id : "",
+      assigneeId: isEditMode ? project.assignee.id : "",
       status: isEditMode ? project.status : true,
     },
     validationSchema,
-    onSubmit: async (values) => {
-      const isConfirmed = await showConfirmation({ title: "XD", description: JSON.stringify(values, null, 2)});
-      console.log(isConfirmed, "confirmed")
+    onSubmit: async (values, { resetForm }) => {
+        const created = await API.createProject(values);
+        if (created) {
+          showSuccess({ title: 'Project created', description: 'The project has been created successfully' });
+          resetForm();
+        } else {
+          showError({ title: 'Error', description: "The project couldn't be created, please try again" });
+        }
     },
   });
 
@@ -37,25 +42,24 @@ export default function Form({ project }) {
     { value: false, label: 'Disabled' },
   ];
 
-  const managerOptions = persons?.map((p) => ({value: p.id, label: `${p.firstName} ${p.lastName}`}));
-  const assigneeOptions = persons?.map((p) => ({value: p.id, label: `${p.firstName} ${p.lastName}`}));
+  const managerOptions = persons?.map((p) => ({ value: p.id, label: `${p.firstName} ${p.lastName}` }));
+  const assigneeOptions = persons?.map((p) => ({ value: p.id, label: `${p.firstName} ${p.lastName}` }));
 
   return (
     <Box>
-      
       <FormContainer onSubmit={formik.handleSubmit}>
         <Input name='projectName' label='Project name' formik={formik} />
         <Input name='description' label='Description' formik={formik} />
 
         <Select
-          name='projectManager'
+          name='managerId'
           label='Project manager'
           placeholder='Select a person'
           formik={formik}
           options={managerOptions}
         />
         <Select
-          name='assignee'
+          name='assigneeId'
           label='Assigned to'
           placeholder='Select a person'
           formik={formik}
@@ -64,10 +68,10 @@ export default function Form({ project }) {
         <Select name='status' label='Status' placeholder='Select a status' formik={formik} options={statusOptions} />
 
         <Button
-          disabled={isValidating || (formik.dirty ? !formik.isValid : true)}
+          disabled={formik.isSubmitting || isValidating || (formik.dirty ? !formik.isValid : true)}
           isLoading={formik.isSubmitting}
           type='submit'
-          label='Create project'
+          label={isEditMode ? 'Update Project' : 'Create project'}
         />
       </FormContainer>
     </Box>
