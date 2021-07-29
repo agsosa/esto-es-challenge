@@ -1,13 +1,23 @@
 import tw from 'twin.macro';
 import VStack from '@components/common/VStack';
+import HStack from '@components/common/HStack';
 
-const DateText = tw.span`text-sm text-gray-400`;
+const DateValue = tw.span`text-sm text-gray-400`;
+const DateLabel = tw(DateValue)`hidden sm:flex`;
 
-export default function ProjectInfo() {
+export default function ProjectInfo({ project }) {
+  const d = new Date(project?.createdAt);
+  let dateString;
+
+  if (d && !isNaN(d.getTime()))
+    dateString = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()} ${
+      d.getHours() > 12 ? 'pm' : 'am'
+    }`;
+
   return (
     <VStack>
-      <span>Landing Page</span>
-      <DateText>Creation date: 28/07/2021 15:31</DateText>
+      <spa1n>{project?.projectName}</spa1n>
+      <HStack><DateLabel>Creation date:</DateLabel> <DateValue>{dateString}</DateValue></HStack>
     </VStack>
   );
 }

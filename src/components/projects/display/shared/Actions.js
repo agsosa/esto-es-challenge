@@ -2,35 +2,25 @@ import { useState } from 'react';
 import tw from 'twin.macro';
 import { HiDotsVertical, HiOutlinePencilAlt } from 'react-icons/hi';
 import { AiOutlineDelete } from 'react-icons/ai';
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverHeader,
-  PopoverBody,
-  PopoverFooter,
-  PopoverArrow,
-  PopoverCloseButton,
-} from '@chakra-ui/react';
-
+import { Popover, PopoverTrigger, PopoverContent, PopoverArrow } from '@chakra-ui/react';
+import { showConfirmation } from '@lib/Alerts';
 const MenuBtn = tw.button`text-2xl`;
 
 const ItemList = tw.ul`flex flex-col`;
 const Item = tw.li`flex space-x-2 items-center border-b p-3 w-full cursor-pointer transition duration-500 hover:bg-gray-100`;
 
-export default function Actions() {
+export default function Actions({ project }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const open = () => setIsOpen(!isOpen);
   const close = () => setIsOpen(false);
 
-  const handleEdit = () => {
+  const handleEdit = () => {};
 
-  }
-
-  const handleDelete = () => {
-    
-  }
+  const handleDelete = async () => {
+    const isConfirmed = await showConfirmation({ title: 'Delete project', description: `Do you want to delete the project "${project.projectName}"?`});
+    if (isConfirmed) console.log("delete")
+  };
 
   return (
     <>
