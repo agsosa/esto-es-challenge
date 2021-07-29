@@ -19,7 +19,7 @@ const MenuBtn = tw.button`text-2xl`;
 const ItemList = tw.ul`flex flex-col`;
 const Item = tw.li`flex space-x-2 items-center border-b p-3 w-full cursor-pointer transition duration-500 hover:bg-gray-100`;
 
-export default function Actions({ project }) {
+export default function Actions({ project, mutate }) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter()
 
@@ -40,7 +40,10 @@ export default function Actions({ project }) {
 
     if (isConfirmed) {
       const deleted = await API.deleteProject(project.id);
-      if (deleted) showSuccess(); else showError();
+      if (deleted) {
+        if (mutate) mutate();
+        showSuccess();
+       } else showError();
     }
   };
 
@@ -71,5 +74,6 @@ export default function Actions({ project }) {
 }
 
 Actions.propTypes = {
-  project: PropTypes.shape({ id: PropTypes.number.isRequired, projectName: PropTypes.string.isRequired }).isRequired
+  project: PropTypes.shape({ id: PropTypes.number.isRequired, projectName: PropTypes.string.isRequired }).isRequired,
+  mutate: PropTypes.func.isRequired
 }

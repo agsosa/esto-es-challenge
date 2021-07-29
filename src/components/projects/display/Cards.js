@@ -15,7 +15,7 @@ const Container = tw.div`w-full flex flex-col items-center md:grid md:grid-cols-
 const Card = tw.div`flex flex-col space-y-3 shadow-sm bg-white border-b-2 p-5 w-full`;
 const CardHeader = tw.div`flex justify-between items-center`;
 
-export default function Cards({ projects }) {
+export default function Cards({ projects, mutate }) {
   return (
     <Container>
       {Array.isArray(projects) && projects.length > 0 ? (
@@ -23,7 +23,7 @@ export default function Cards({ projects }) {
           <Card key={p.id}>
             <CardHeader>
               <ProjectInfo project={p} />
-              <Actions project={p} />
+              <Actions project={p} mutate={mutate} />
             </CardHeader>
             <AssignedTo project={p} />
           </Card>
@@ -36,5 +36,6 @@ export default function Cards({ projects }) {
 }
 
 Cards.propTypes = {
-  projects: PropTypes.arrayOf(PropTypes.object).isRequired
+  projects: PropTypes.arrayOf(PropTypes.object).isRequired,
+  mutate: PropTypes.func.isRequired
 }
