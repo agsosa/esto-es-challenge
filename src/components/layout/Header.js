@@ -1,7 +1,7 @@
 import tw from 'twin.macro';
 import Link from 'next/link';
 
-const Header = tw.header`bg-white px-12 py-4 h-20 border-b`;
+const Header = tw.header`bg-white px-14 w-full py-4 h-20 border-b flex items-center`;
 
 const LogoPlaceholder = tw.a`
 text-xl text-gray-400 
