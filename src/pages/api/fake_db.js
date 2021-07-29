@@ -39,7 +39,7 @@ const seed = () => {
   }
 
   // Create fake projects
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 50; i++) {
     DB.projects.push({
       id: i,
       projectName: getRandomElement(PROJECT_NAMES),

@@ -2,7 +2,7 @@
 
 import DB from '../fake_db';
 
-const LIMIT_PER_PAGE = 10;
+const LIMIT_PER_PAGE = 7;
 
 // POST /api/projects
 const handlePostRequest = (req, res) => {
