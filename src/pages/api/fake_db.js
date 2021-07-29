@@ -1,4 +1,4 @@
-// Fake DB to simulate a projects API
+// Fake DB (just an array) to simulate a projects API
 
 import faker from 'faker';
 

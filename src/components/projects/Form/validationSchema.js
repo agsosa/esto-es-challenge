@@ -1,3 +1,5 @@
+// Yup schema to validate a project form
+
 import * as Yup from 'yup';
 
 const MESSAGES = {

@@ -11,6 +11,7 @@ const handlePostRequest = (req, res) => {
   assigneeId = Number.parseInt(assigneeId);
   managerId = Number.parseInt(managerId);
 
+  // Validate input
   if (!projectName || !description || Number.isNaN(assigneeId) || Number.isNaN(managerId) || status == null)
     return res.status(400).send({ error: true, message: 'Invalid params' });
 
@@ -41,11 +42,14 @@ const handleGetRequest = (req, res) => {
   const page = Number.parseInt(req.query.page) || 1;
   const search = req.query.search || "";
 
+  // Filter projects by deletedAt, projectName and sort by createdAt date
   const filtered = DB.projects.filter((q) => !q.deletedAt && q.projectName.toLowerCase().startsWith(search.toLowerCase())).sort((a, b) => b.createdAt - a.createdAt);
+
   const totalPages = Math.max(Math.floor(filtered.length / LIMIT_PER_PAGE), 1);
   
   if (page <= 0 || page > totalPages) return res.status(403).json({error: true, message: `Page must be between 1 and ${totalPages}`})
 
+  // Limit projects by page
   const paginated = filtered.slice((page - 1) * LIMIT_PER_PAGE, page * LIMIT_PER_PAGE);
 
   res
