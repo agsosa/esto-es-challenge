@@ -10,8 +10,8 @@ const InputComponent = memo(({ label, type = "text", placeholder = "", name, for
     <InputContainer>
       <label htmlFor={name}>{label}</label>
       <Input
-        placeholder
-        type
+        placeholder={placeholder}
+        type={type}
         onBlur={formik.handleBlur}
         onChange={formik.handleChange}
         name={name}

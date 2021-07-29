@@ -16,7 +16,7 @@ export default function ProjectInfo({ project }) {
 
   return (
     <VStack>
-      <spa1n>{project?.projectName}</spa1n>
+      <span>{project?.projectName}</span>
       <HStack><DateLabel>Creation date:</DateLabel> <DateValue>{dateString}</DateValue></HStack>
     </VStack>
   );

@@ -14,7 +14,8 @@ const SelectComponent = memo(({ name, label, formik, options, ...props }) => {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         {...props}>
-        {Array.isArray(options) && options.map((op) => <option value={op.value} label={op.label || op.value} />)}
+        {Array.isArray(options) &&
+          options.map((op) => <option key={op.value} value={op.value} label={op.label || op.value} />)}
       </Select>
       <ErrorText>{formik.touched[name] && formik.errors[name]}</ErrorText>
     </InputContainer>

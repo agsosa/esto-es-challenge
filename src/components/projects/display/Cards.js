@@ -13,7 +13,7 @@ export default function List({ projects }) {
     <Container>
       {Array.isArray(projects) ? (
         projects.map((p) => (
-          <Card>
+          <Card key={p.id}>
             <CardHeader>
               <ProjectInfo project={p} />
               <Actions project={p} />
