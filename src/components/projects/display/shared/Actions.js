@@ -3,7 +3,9 @@ import tw from 'twin.macro';
 import { HiDotsVertical, HiOutlinePencilAlt } from 'react-icons/hi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Popover, PopoverTrigger, PopoverContent, PopoverArrow } from '@chakra-ui/react';
-import { showConfirmation } from '@lib/Alerts';
+import { showConfirmation, showSuccess, showError } from '@lib/Alerts';
+import API from '@lib/API';
+
 const MenuBtn = tw.button`text-2xl`;
 
 const ItemList = tw.ul`flex flex-col`;
@@ -18,8 +20,14 @@ export default function Actions({ project }) {
   const handleEdit = () => {};
 
   const handleDelete = async () => {
-    const isConfirmed = await showConfirmation({ title: 'Delete project', description: `Do you want to delete the project "${project.projectName}"?`});
-    if (isConfirmed) console.log("delete")
+    const isConfirmed = await showConfirmation({
+      title: 'Delete project',
+      description: `Do you want to delete the project "${project.projectName}"?`,
+    });
+    if (isConfirmed) {
+      const deleted = await API.deleteProject(project.id);
+      if (deleted) showSuccess(); else showError();
+    }
   };
 
   return (
