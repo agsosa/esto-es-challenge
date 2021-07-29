@@ -18,7 +18,7 @@ const CardHeader = tw.div`flex justify-between items-center`;
 export default function Cards({ projects }) {
   return (
     <Container>
-      {Array.isArray(projects) ? (
+      {Array.isArray(projects) && projects.length > 0 ? (
         projects.map((p) => (
           <Card key={p.id}>
             <CardHeader>

@@ -39,7 +39,7 @@ export default function TableComponent({ projects }) {
       </thead>
       <tbody>
         {/* Data */}
-        {Array.isArray(projects) ? (
+        {Array.isArray(projects) && projects.length > 0 ? (
           projects.map((p) => (
             <DataRow key={p.id}>
               <Data>
