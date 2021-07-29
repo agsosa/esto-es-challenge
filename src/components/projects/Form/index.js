@@ -34,7 +34,7 @@ export default function Form({ project }) {
     validationSchema,
     onSubmit: async (values, { resetForm }) => {
       const func = isEditMode ? API.updateProject : API.createProject;
-      const result = await func({ ...values, id: project.id });
+      const result = await func({ ...values, id: project ? project.id : -1 });
 
       if (result) {
         showSuccess({

@@ -24,7 +24,7 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
 
-  const { data, error, isValidating } = API.getProjects(page, search); // Get projects from the API
+  const { data, error, isValidating, mutate } = API.getProjects(page, search); // Get projects from the API
 
   const [isLG] = useMediaQuery('(min-width: 1024px)'); // Breakpoint to hide the table and display the list of cards (mobile)
 
@@ -48,8 +48,8 @@ export default function Home() {
 
       <Main>
         {/* Loading indicator */ isValidating && <Spinner size='xl' />}
-        {/* Desktop */ !isValidating && isLG && <ProjectsTable projects={data?.result?.list} />}
-        {/* Mobile */ !isValidating && !isLG && <ProjectsCards projects={data?.result?.list} />}
+        {/* Desktop */ !isValidating && isLG && <ProjectsTable projects={data?.result?.list} mutate={mutate} />}
+        {/* Mobile */ !isValidating && !isLG && <ProjectsCards projects={data?.result?.list} mutate={mutate} />}
         {
           /* Pagination */ !isValidating && (
             <Pagination

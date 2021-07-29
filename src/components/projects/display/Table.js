@@ -24,7 +24,7 @@ const Header = styled.th(({ roundedLeft, roundedRight }) => [
 const DataRow = tw.tr`bg-white`;
 const Data = tw.td`p-5 border-b`;
 
-export default function TableComponent({ projects }) {
+export default function TableComponent({ projects, mutate }) {
   return (
     <Table>
       <thead>
@@ -55,7 +55,7 @@ export default function TableComponent({ projects }) {
                 <Status project={p} />
               </Data>
               <Data>
-                <Actions project={p} />
+                <Actions project={p} mutate={mutate} />
               </Data>
             </DataRow>
           ))
@@ -68,5 +68,6 @@ export default function TableComponent({ projects }) {
 }
 
 TableComponent.propTypes = {
-  projects: PropTypes.arrayOf(PropTypes.object).isRequired
+  projects: PropTypes.arrayOf(PropTypes.object).isRequired,
+  mutate: PropTypes.func.isRequired
 }
